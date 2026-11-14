@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Cup 2030 Countdown</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: white;
+  background:
+    radial-gradient(ellipse at 50% 20%, #286b40, transparent 55%),
+    linear-gradient(145deg, #071b12, #020806);
+  padding: 24px;
+}
+.container { max-width: 600px; width: 100%; }
+.tag {
+  color: #a5e9b7;
+  letter-spacing: 4px;
+  font-size: 12px;
+}
+h1 {
+  font-size: clamp(32px, 9vw, 55px);
+  margin: 22px 0 8px;
+}
+.subtitle { color: #b7c9bd; }
+.days {
+  font-size: clamp(85px, 25vw, 150px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-top: 35px;
+  text-shadow: 0 0 35px #3bc46a66;
+}
+.remaining {
+  color: #9de5b0;
+  letter-spacing: 5px;
+  font-size: 14px;
+}
+.timer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 35px;
+}
+.unit {
+  background: #ffffff12;
+  border: 1px solid #ffffff22;
+  border-radius: 14px;
+  padding: 17px 5px;
+}
+.number { font-size: 28px; font-weight: bold; }
+small { color: #a5c2ad; }
+footer {
+  margin-top: 45px;
+  color: #789684;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="tag">THE WORLD IS WAITING</div>
+  <h1>FIFA WORLD CUP 2030</h1>
+  <p class="subtitle">One world. One dream. One trophy.</p>
+
+  <div class="days" id="days">---</div>
+  <div class="remaining">DAYS REMAINING</div>
+
+  <div class="timer">
+    <div class="unit">
+      <div class="number" id="hours">00</div>
+      <small>HOURS</small>
+    </div>
+    <div class="unit">
+      <div class="number" id="minutes">00</div>
+      <small>MINUTES</small>
+    </div>
+    <div class="unit">
+      <div class="number" id="seconds">00</div>
+      <small>SECONDS</small>
+    </div>
+  </div>
+
+  <footer>FOOTBALL UNITES THE WORLD</footer>
+</div>
+
+<script>
+const target = new Date("2030-06-13T00:00:00+05:30").getTime();
+
+function updateCountdown() {
+  const now = Date.now();
+  const difference = target - now;
+
+  if (difference <= 0) {
+    document.getElementById("days").textContent = "0";
+    return;
+  }
+
+  document.getElementById("days").textContent =
+    Math.floor(difference / 86400000);
+
+  document.getElementById("hours").textContent =
+    String(Math.floor(difference / 3600000) % 24).padStart(2,"0");
+
+  document.getElementById("minutes").textContent =
+    String(Math.floor(difference / 60000) % 60).padStart(2,"0");
+
+  document.getElementById("seconds").textContent =
+    String(Math.floor(difference / 1000) % 60).padStart(2,"0");
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
